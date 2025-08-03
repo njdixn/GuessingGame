@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Nikole Dixon">
+    <title>Guessing Game</title>
+    <link rel="stylesheet" href="css/styles.css">
+  </head>
+
+  <body>
+
+    <script>
+      // Allows the user to play multiple games
+      let playAgain = true; // If the game should restart
+
+      while (playAgain) {
+        // Generate a random number between 1 and 10
+        let randomNumber = Math.floor(Math.random() * 10) + 1;
+
+        //Put number in console
+        console.log("Secret number:", randomNumber);
+
+        // Set the initial number of guesses
+        let guessCount = 0;
+
+        // To track if the current round is over
+        let guessedCorrectly = false;
+
+        // Keep asking the user for guesses until they get it right
+        while (!guessedCorrectly) {
+          // Prompt the user for a guess
+          let userInput = prompt("Guess a number between 1 and 10.");
+
+          // Convert input from string to number
+          let guess = parseInt(userInput);
+
+          // Increase guess count
+          guessCount++;
+
+          // Check if valid number
+          if (isNaN(guess) || guess < 1 || guess > 10) {
+            alert("Please enter a valid number between 1 and 10.");
+            continue; // Skip the rest of the loop if invalid
+          }
+
+          // Compare the guess to the secret number
+          if (guess < randomNumber) {
+            alert("Your guess is too low. Try again.");
+          } else if (guess > randomNumber) {
+            alert("Your guess is too high. Try again.");
+          } else {
+            // Correct guess!
+            alert("You guesses it in " + guessCount) + " guesses!";
+            guessedCorrectly = true; // Exit the inner loop
+          }
+        }
+
+        // Ask the user if they want to play again
+        let again = prompt("Would you like to play again? (yes or no)").toLowerCase();
+
+        // If the user enters "no", end the outer loop
+        if (again !== "yes" && again !== "y") {
+          playAgain = false;
+          alert("Thanks for playing!");
+        }
+      }
+    </script>
+
+  </body>
+</html>
